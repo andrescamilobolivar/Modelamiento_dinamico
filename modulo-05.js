@@ -17,9 +17,7 @@ L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}
 }).addTo(map);
 
 let upzLayers = {};
-let upzLabels = {};
 let barriosLayers = {};
-let barrioLabels = {};
 let humedalLayers = {};
 let humedalMarkers = {};
 let eepNodos = [];
@@ -42,28 +40,8 @@ fetch('upz_bogota.geojson')
   .then(data => {
     upzData = data.features.map(f => f.properties);
     
-    data.features.forEach((feature, idx) => {
-      const props = feature.properties;
-      const code = props.uplcodigo.split('UPZ')[1]?.trim() || props.id;
-      
-      const coords = feature.geometry.coordinates;
-      
-      const labelDiv = L.divIcon({
-        html: `<div style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; background: transparent; color: #2fd4c8; font-weight: 700; font-size: 9px; border: 1.5px solid #2fd4c8; border-radius: 50%; text-shadow: 0 0 6px rgba(0,0,0,0.8);">${code}</div>`,
-        className: 'upz-label-marker',
-        iconSize: [24, 24],
-        iconAnchor: [12, 12]
-      });
-      
-      const marker = L.marker([coords[1], coords[0]], { icon: labelDiv, interactive: false });
-      upzLabels[props.id] = marker;
-      
-      // Mostrar por defecto si estamos en macro
-      if (currentMode === 'macro') {
-        marker.addTo(map);
-      }
-    });
-    
+    // Los códigos de las UPL se mantienen únicamente en la lista lateral.
+    // No se crean marcadores ni círculos dentro del mapa.
     renderItemList();
   });
 
@@ -73,20 +51,8 @@ fetch('barrios_bogota.geojson')
   .then(data => {
     barrosData = data.features.map(f => f.properties);
     
-    data.features.forEach((feature, idx) => {
-      const props = feature.properties;
-      const coords = feature.geometry.coordinates;
-      
-      const labelDiv = L.divIcon({
-        html: `<div style="width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; background: transparent; color: #2fd4c8; font-weight: 700; font-size: 7px; border: 1px solid #2fd4c8; border-radius: 50%; text-shadow: 0 0 4px rgba(0,0,0,0.8);">${props.codigo}</div>`,
-        className: 'barrio-label-marker',
-        iconSize: [16, 16],
-        iconAnchor: [8, 8]
-      });
-      
-      const marker = L.marker([coords[1], coords[0]], { icon: labelDiv, interactive: false });
-      barrioLabels[props.id] = marker;
-    });
+    // Los códigos de los barrios se mantienen únicamente en la lista lateral.
+    // No se crean marcadores ni círculos dentro del mapa.
   });
 
 // Cargar nodos de la red EEP
@@ -508,9 +474,6 @@ document.querySelectorAll('.tab').forEach(btn => {
       try { map.removeLayer(capaUpzLayer); } catch(e) {}
     }
     
-    Object.values(barrioLabels).forEach(marker => {
-      try { map.removeLayer(marker); } catch(e) {}
-    });
     Object.values(humedalLayers).forEach(layer => {
       try { map.removeLayer(layer); } catch(e) {}
     });
@@ -529,8 +492,6 @@ document.querySelectorAll('.tab').forEach(btn => {
     if (scale === 'macro') {
       currentMode = 'macro';
       map.setView([4.60, -74.08], 11);
-      Object.values(upzLabels).forEach(marker => marker.addTo(map));
-      
       // AÑADIR CAPA DE VÍAS EN ESCALA MACRO
       if (viasLayer) {
         viasLayer.addTo(map);
@@ -539,11 +500,7 @@ document.querySelectorAll('.tab').forEach(btn => {
     } else if (scale === 'meso') {
       currentMode = 'meso';
       map.setView([4.60, -74.08], 12);
-      Object.values(barrioLabels).forEach(marker => marker.addTo(map));
-      Object.values(upzLabels).forEach(marker => {
-        try { map.removeLayer(marker); } catch(e) {}
-      });
-
+      
       // AÑADIR CAPA 0 (AUTOCAD) EN ESCALA MESO
       if (capa0Layer) {
         capa0Layer.addTo(map);
