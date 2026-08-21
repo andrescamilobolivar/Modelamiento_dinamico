@@ -597,16 +597,18 @@ footer span { color: var(--teal); }
   background: rgba(239, 149, 82, 0.08); flex-shrink: 0;
 }
 .movilidad-overlay-title { font-size: 15px; font-weight: 700; color: #f2f3f6; line-height: 1.3; padding-right: 12px; }
+.movilidad-zoom-controls { margin-left: auto; margin-right: 12px; }
 .movilidad-overlay-body { flex: 1; display: flex; min-height: 0; padding: 16px; }
 .movilidad-overlay-image-wrap {
   position: relative; flex: 1; min-width: 0; background: #0a0a0a;
   display: flex; align-items: center; justify-content: center; overflow: hidden;
-  border-radius: 8px;
+  border-radius: 8px; cursor: grab; touch-action: none;
 }
+.movilidad-overlay-image-wrap.panning { cursor: grabbing; }
 /* Mismo patrón que humedales-overlay-image-frame: contenedor con la
    proporción REAL de la foto (16:9), calculado por JS (fitMovilidadFrame)
    para que los hotspots/líneas en % siempre calcen exactamente. */
-.movilidad-overlay-image-frame { position: relative; }
+.movilidad-overlay-image-frame { position: relative; transform-origin: center center; will-change: transform; }
 .movilidad-overlay-image { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; border-radius: 6px; }
 .movilidad-overlay-lines {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -787,12 +789,17 @@ footer span { color: var(--teal); }
   pointer-events: stroke; cursor: pointer;
 }
 .movilidad-trazo-rosa polyline:not(.movilidad-trazo-hit) {
-  fill: none; stroke: var(--linea-color, #e9695c); stroke-width: 0.18;
+  fill: none; stroke: var(--linea-color, #e9695c); stroke-width: var(--linea-width, 0.18);
   stroke-linecap: round; stroke-linejoin: round;
   stroke-dasharray: 0.35 0.7;
   color: var(--linea-color, #e9695c);
   filter: drop-shadow(0 0 1px currentColor);
   animation: movilidadTrazoFlujo 5.5s linear infinite;
+}
+.movilidad-trazo-rosa polyline.movilidad-line-linea_roja_referencia,
+.movilidad-trazo-rosa polyline.movilidad-line-linea_verde_referencia {
+  stroke-dasharray: none;
+  animation: none;
 }
 @keyframes movilidadTrazoFlujo { to { stroke-dashoffset: -2.5; } }
 @media (prefers-reduced-motion: reduce) {
@@ -875,88 +882,4 @@ footer span { color: var(--teal); }
 @media (max-width: 700px) {
   .red-principal-reflexion { padding: 22px 18px 24px; }
   .red-principal-reflexion p { text-align: left; }
-}
-
-
-/* Texto legible de las tarjetas Hallazgo del nodo. */
-#nodeInfoPanel,
-#nodeInfoPanel #nodeInfoTitle,
-#nodeInfoPanel #nodeInfoArticulo,
-#nodeInfoPanel #nodeInfoQuote,
-#nodeInfoPanel #nodeInfoNota {
-  color: #ffffff !important;
-}
-#nodeInfoPanel #nodeInfoMapa a { color: #ffffff !important; }
-
-
-/* Módulo Simulador: de las reglas escritas a la simulación viva. */
-.simulador-pot-modulo {
-  width: min(100%, 980px);
-  margin: 28px auto 0;
-  padding: 30px;
-  border: 1px solid rgba(92, 214, 209, 0.32);
-  border-radius: 14px;
-  background: linear-gradient(145deg, rgba(11, 21, 24, 0.97), rgba(10, 12, 14, 0.97));
-  color: #f2f3f6;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
-}
-.simulador-pot-modulo h2 {
-  margin: 0 0 22px;
-  color: #5cd6d1;
-  font-size: clamp(1.35rem, 2.3vw, 1.95rem);
-  line-height: 1.25;
-}
-.simulador-pot-modulo p {
-  margin: 0 0 17px;
-  color: #f2f3f6;
-  font-size: 1rem;
-  line-height: 1.72;
-  text-align: justify;
-}
-.simulador-pot-pilar {
-  margin: 22px 0;
-  padding: 20px 22px;
-  border-left: 3px solid rgba(92, 214, 209, 0.78);
-  border-radius: 0 10px 10px 0;
-  background: rgba(92, 214, 209, 0.06);
-}
-.simulador-pot-pilar h3 {
-  margin: 0 0 9px;
-  color: #ffb35a;
-  font-size: 1.1rem;
-}
-.simulador-pot-pilar p { margin-bottom: 0; }
-.simulador-pot-cita {
-  margin: 24px 0;
-  padding: 20px 22px;
-  border-left: 3px solid #ffb35a;
-  border-radius: 0 10px 10px 0;
-  background: rgba(255, 179, 90, 0.07);
-  color: #ffffff;
-  font-size: 1rem;
-  line-height: 1.72;
-}
-.simulador-pot-cita strong { color: #ffcf8a; }
-.simulador-pot-cierre {
-  margin-top: 24px !important;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-  color: #ffffff !important;
-  font-weight: 600;
-}
-@media (max-width: 700px) {
-  .simulador-pot-modulo { padding: 22px 18px; }
-  .simulador-pot-modulo p { text-align: left; }
-  .simulador-pot-pilar, .simulador-pot-cita { padding: 16px 17px; }
-}
-
-
-/* Legibilidad reforzada para los textos de los pop-ups ODS y POT. */
-#nodeInfoPanel .edge-info-quote,
-#nodeInfoPanel .edge-info-analisis,
-#nodeInfoPanel .edge-info-page,
-#edgeInfoPanel .edge-info-quote,
-#edgeInfoPanel .edge-info-analisis,
-#edgeInfoPanel .edge-info-page {
-  color: #ffffff !important;
 }
