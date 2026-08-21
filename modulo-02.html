@@ -67,7 +67,9 @@
              sub-red aportada por la usuaria con hotspots clicables sobre cada humedal. -->
         <div class="humedales-overlay" id="humedalesOverlay" style="display:none;">
           <div class="humedales-overlay-header">
-            <div class="humedales-overlay-title">El POT no entiende los humedales como territorios dinámicos</div>
+            <div class="humedales-overlay-title-block">
+              <div class="humedales-overlay-title">El POT no entiende los humedales como territorios dinámicos</div>
+            </div>
             <div class="humedales-zoom-controls">
               <button class="humedales-zoom-btn" id="humedalesZoomOut" type="button" aria-label="Alejar">&minus;</button>
               <button class="humedales-zoom-btn" id="humedalesZoomReset" type="button" aria-label="Restablecer zoom">&#8859;</button>
@@ -85,6 +87,11 @@
         <div class="movilidad-overlay" id="movilidadOverlay" style="display:none;">
           <div class="movilidad-overlay-header">
             <div class="movilidad-overlay-title">El POT no evalúa cómo se mueve la ciudad</div>
+            <div class="humedales-zoom-controls movilidad-zoom-controls" aria-label="Controles de zoom del mapa">
+              <button class="humedales-zoom-btn" id="movilidadZoomOut" type="button" aria-label="Alejar">&minus;</button>
+              <button class="humedales-zoom-btn" id="movilidadZoomReset" type="button" aria-label="Restablecer zoom">&#8859;</button>
+              <button class="humedales-zoom-btn" id="movilidadZoomIn" type="button" aria-label="Acercar">&plus;</button>
+            </div>
             <button class="humedales-overlay-close" id="movilidadOverlayClose" type="button" aria-label="Cerrar">&times;</button>
           </div>
           <div class="movilidad-overlay-body" id="movilidadOverlayBody">
@@ -163,15 +170,29 @@
 
           <!-- Panel de conclusión del zoom de humedales: vive en el sidebar,
                reemplaza a la leyenda mientras el overlay está abierto. -->
+          <!-- Panel del zoom "El POT no evalúa cómo se mueve la ciudad": vive en el
+               sidebar y solo se muestra mientras ese overlay está abierto. Editar
+               aquí NO afecta al panel de la red inicial. -->
+          <div class="humedal-ramsar-float" id="movilidadPanelLateral" style="display:none">
+            <div style="display:inline-flex; align-items:center; gap:7px; margin-bottom:11px; padding:5px 11px; border:1.5px solid #ff9d2e; border-radius:8px; color:#ff9d2e; font-size:13px; font-weight:700; letter-spacing:.03em; box-shadow:0 0 0 1px rgba(255,157,46,.18), 0 0 14px -2px rgba(255,157,46,.55); text-shadow:0 0 8px rgba(255,157,46,.45)"><i class="fa-solid fa-chart-simple"></i> Hallazgo principal</div>
+            <div class="humedal-caso-cita" style="text-align:justify">El POT proyecta el sistema de movilidad como un conjunto de trazados y equipamientos, pero no mide cómo se mueve realmente la ciudad.</div>
+            <div class="humedal-caso-pagina" style="text-align:justify">Las líneas y los círculos del plano indican dónde llegará la infraestructura, no los tiempos de viaje, los transbordos, los desplazamientos de cuidado ni los recorridos que la gente ya hace todos los días.</div>
+          </div>
+
           <div class="humedal-ramsar-float" id="humedalRamsarFloat" style="display:none">
             <div style="display:inline-flex; align-items:center; gap:7px; margin-bottom:11px; padding:5px 11px; border:1.5px solid #ff9d2e; border-radius:8px; color:#ff9d2e; font-size:13px; font-weight:700; letter-spacing:.03em; box-shadow:0 0 0 1px rgba(255,157,46,.18), 0 0 14px -2px rgba(255,157,46,.55); text-shadow:0 0 8px rgba(255,157,46,.45); width:221px; height:31px"><i class="fa-solid fa-chart-simple"></i> Hallazgo principal</div>
-            <div class="humedal-caso-cita" style="text-align:justify">El POT reconoce quince humedales, pero no desarrolla todos con el mismo nivel de detalle. Algunos aparecen con nombre propio y se convierten en casos específicos y otros permanecen dentro de la categoría general.</div>
-            <div class="humedal-caso-pagina" style="text-align:justify">La cartografía puede fijar un polígono de protección, pero no muestra por sí sola los cambios del agua, los recorridos de las especies, las relaciones ecológicas, los usos comunitarios ni las presiones que atraviesan el límite del humedal. El POT no los comprende plenamente como ecosistemas que se transforman en el tiempo.</div>
+            <div class="humedal-caso-cita" style="text-align:justify">El POT reconoce quince humedales, pero no los desarrolla todos con el mismo nivel de detalle. Algunos aparecen con nombre propio y se vuelven casos específicos; otros permanecen dentro de la categoría general.</div>
+            <div class="humedal-caso-pagina" style="text-align:justify">La cartografía fija un polígono de protección, pero no muestra los <button type="button" class="humedales-gesto-inline" data-src="assets/humedales/gesto-2.png">recorridos de las especies</button>, las <button type="button" class="humedales-gesto-inline" data-src="assets/humedales/gesto-3.png">relaciones ecológicas</button>, los <button type="button" class="humedales-gesto-inline" data-src="assets/humedales/gesto-1.png">usos comunitarios</button> ni las presiones que atraviesan el límite del humedal. El POT no los comprende plenamente como ecosistemas que se transforman en el tiempo.</div>
           </div>
-        </div>
+                </div>
       </div>
+      <section class="red-principal-reflexion" aria-labelledby="pot-modelo-oficial-title">
+        <h2 id="pot-modelo-oficial-title">¿Es suficiente el POT como único modelo oficial de la ciudad?</h2>
+        <p>El POT es, ante todo, un instrumento jurídico-administrativo: su función es fijar competencias, autorizar usos, declarar protecciones y darle exigibilidad legal a un modelo de ciudad. Eso lo hace bien, y ninguna simulación por sí sola puede reemplazar esa función normativa.</p>
+        <p>El problema aparece cuando ese instrumento jurídico se convierte, además, en el único modelo explicativo de cómo funciona la ciudad. Y ahí es donde los tres hallazgos que mostramos se vuelven un mismo argumento:</p>
+        <p>Primero, el POT construye la ciudad como una suma de objetos localizados, no como un sistema de flujos. Segundo, esa arquitectura produce una red de "mundo pequeño" —estructuras densas hacia adentro y prácticamente aisladas entre sí— que el propio texto no evidencia porque solo se lee de manera lineal, artículo por artículo. Tercero, el plan formula reglas generativas —como el Artículo 304— sin ningún mecanismo que le permita anticipar lo que esas reglas producen cuando miles de agentes actúan sobre ellas al mismo tiempo.</p>
+      </section>
     </div>
-
     <!-- PANEL DE INFO: ARISTA -->
     <div class="edge-info-panel" id="edgeInfoPanel">
       <div class="edge-info-header">
