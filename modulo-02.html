@@ -87,6 +87,11 @@
         <div class="movilidad-overlay" id="movilidadOverlay" style="display:none;">
           <div class="movilidad-overlay-header">
             <div class="movilidad-overlay-title">El POT no evalúa cómo se mueve la ciudad</div>
+            <div class="humedales-zoom-controls movilidad-zoom-controls" aria-label="Controles de zoom del mapa">
+              <button class="humedales-zoom-btn" id="movilidadZoomOut" type="button" aria-label="Alejar">&minus;</button>
+              <button class="humedales-zoom-btn" id="movilidadZoomReset" type="button" aria-label="Restablecer zoom">&#8859;</button>
+              <button class="humedales-zoom-btn" id="movilidadZoomIn" type="button" aria-label="Acercar">&plus;</button>
+            </div>
             <button class="humedales-overlay-close" id="movilidadOverlayClose" type="button" aria-label="Cerrar">&times;</button>
           </div>
           <div class="movilidad-overlay-body" id="movilidadOverlayBody">
@@ -187,28 +192,6 @@
         <p>El problema aparece cuando ese instrumento jurídico se convierte, además, en el único modelo explicativo de cómo funciona la ciudad. Y ahí es donde los tres hallazgos que mostramos se vuelven un mismo argumento:</p>
         <p>Primero, el POT construye la ciudad como una suma de objetos localizados, no como un sistema de flujos. Segundo, esa arquitectura produce una red de "mundo pequeño" —estructuras densas hacia adentro y prácticamente aisladas entre sí— que el propio texto no evidencia porque solo se lee de manera lineal, artículo por artículo. Tercero, el plan formula reglas generativas —como el Artículo 304— sin ningún mecanismo que le permita anticipar lo que esas reglas producen cuando miles de agentes actúan sobre ellas al mismo tiempo.</p>
       </section>
-      <section class="simulador-pot-modulo" aria-labelledby="simulador-pot-title">
-        <h2 id="simulador-pot-title">Módulo Simulador — de las reglas escritas a la simulación viva</h2>
-        <p>Si el POT tiene reglas generativas pero no las corre, nuestra plataforma es precisamente el artefacto que permite correr esa simulación que el Plan escribe pero nunca ejecuta.</p>
-        <p>Construimos el modelo alrededor de tres pilares que interactúan dinámicamente, superando la separación tradicional entre “ciudad física” y “ciudad social”:</p>
-        <div class="simulador-pot-pilar">
-          <h3>Personas — agentes de cuidado</h3>
-          <p>Con enfoque de género y derechos del Sistema Distrital de Cuidado, cada agente tiene una trayectoria diaria orientada a resolver necesidades en un rango de 15 minutos caminando. No es una distancia medida en línea recta sobre un mapa: es fatiga acumulada, tiempo disponible y simultaneidad de servicios.</p>
-        </div>
-        <div class="simulador-pot-pilar">
-          <h3>Viviendas — soporte de habitabilidad</h3>
-          <p>Tomamos los estándares reales del POT —36 m² para VIS/VIP, 42 m² para acreditación de obligaciones— y la posibilidad de mejoramiento progresivo. La vivienda no es un punto fijo en el mapa: es el nodo de origen y retorno de cada agente, y afecta dinámicamente su nivel de estrés y salud.</p>
-        </div>
-        <blockquote class="simulador-pot-cita"><strong>🗣️ Cita para decir en voz alta:</strong> “El Artículo 384 fija el área mínima de una vivienda VIS o VIP en ‘36 metros cuadrados’, con cocina, baño, dos cuartos y una zona multifuncional. Y el Parágrafo 1 exige que, para acreditar la obligación urbanística, esa área mínima habitable sea de ‘42 metros cuadrados’. Son los números exactos que usamos como condición inicial de cada agente-vivienda en la simulación.”</blockquote>
-        <div class="simulador-pot-pilar">
-          <h3>Ecosistemas — matriz ecológica ordenadora</h3>
-          <p>El entorno no es un fondo inerte. Programamos los conectores ecosistémicos y el comportamiento hídrico —escorrentía, mitigación de riesgo, sistemas urbanos de drenaje sostenible— como un actor que interactúa físicamente con la movilidad de las personas y la estabilidad de las viviendas de borde.</p>
-        </div>
-        <p>Y sobre estos tres pilares, simulamos lo que el POT declara pero no prueba:</p>
-        <p>Qué pasa cuando un agente no tiene acceso a vivienda formal y se autoconstruye en una ladera de riesgo por supervivencia —la autoorganización informal que el plan reconoce en el papel, pero no modela en la práctica.</p>
-        <p>Qué pasa cuando una perturbación esporádica —un sismo, una inundación— rompe la infraestructura física de un andén, y los agentes tienen que autodeterminarse en tiempo real, ignorando la ruta que el POT formal había previsto, para evacuar hacia el espacio público seguro más cercano.</p>
-        <p class="simulador-pot-cierre">No estamos reemplazando al POT. Estamos construyendo la capa que el instrumento jurídico, por su propia naturaleza, no puede escribir: la ciudad mientras está siendo, no solo la ciudad como debería ser.</p>
-      </section>
     </div>
     <!-- PANEL DE INFO: ARISTA -->
     <div class="edge-info-panel" id="edgeInfoPanel">
@@ -231,9 +214,9 @@
       </div>
       <div class="edge-info-type" id="nodeInfoStruct"></div>
       <div id="nodeInfoFuente" style="margin-bottom:10px;"></div>
-      <div class="edge-info-page" id="nodeInfoArticulo" style="margin-bottom:8px; color:#fff !important;"></div>
-      <div class="edge-info-quote" id="nodeInfoQuote" style="color:#fff !important;"></div>
-      <div class="edge-info-analisis" id="nodeInfoNota" style="color:#fff !important;"></div>
+      <div class="edge-info-page" id="nodeInfoArticulo" style="margin-bottom:8px;"></div>
+      <div class="edge-info-quote" id="nodeInfoQuote"></div>
+      <div class="edge-info-analisis" id="nodeInfoNota"></div>
       <div class="node-info-schematic-map" id="nodeInfoSchematicMap" style="display:none;"></div>
       <div class="node-info-mapa" id="nodeInfoMapaWrap" style="display:none;">
         <a id="nodeInfoMapa" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-map-location-dot"></i> Ver cartografía / geoportal oficial</a>
